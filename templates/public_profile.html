@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user.name }} – Profile | Vaikhanasa Matrimonials</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .text-maroon-800 {
+            color: #5a1a01;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-tr from-amber-100 via-white to-orange-50 font-sans overflow-y-auto">
+
+    <!-- 📍 Full-width Profile Layout -->
+    <div class="w-full px-6 py-10 max-w-5xl mx-auto">
+
+        <!-- 🖼️ Profile Photo -->
+        <div class="text-center mb-6">
+            <img src="/static/uploads/{{ user.photo if user.photo else 'default.jpg' }}"
+                 alt="{{ user.name }}'s Photo"
+                 class="w-32 h-32 rounded-full border-4 border-yellow-500 shadow-md object-cover mx-auto">
+        </div>
+
+        <!-- 🧑 Name + Location -->
+        <h2 class="text-4xl font-extrabold text-maroon-800 text-center mb-2">
+            {{ user.name }}
+        </h2>
+
+        <p class="text-center text-gray-600 text-sm mb-8">
+            {{ user.gender }}, {{ user.age }} &bull; {{ user.city }}, {{ user.country }}
+        </p>
+
+        <!-- 🧾 Detailed Info -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-gray-800 text-base mb-10 max-w-3xl mx-auto">
+
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Phone:</strong> {{ user.phone }}</p>
+            <p><strong>Gotra:</strong> {{ user.gotra }}</p>
+            <p><strong>Nakshatra:</strong> {{ user.nakshatra }}</p>
+        </div>
+
+        <!-- 🔙 Back Button -->
+        <div class="text-center mt-10">
+            <a href="/gallery"
+               class="inline-block bg-yellow-600 text-white px-6 py-2 rounded-full hover:bg-yellow-700 shadow transition text-sm">
+               ← Back to Gallery
+            </a>
+        </div>
+    </div>
+</body>
+</html>

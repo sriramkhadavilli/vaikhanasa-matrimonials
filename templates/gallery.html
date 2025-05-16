@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Public Gallery | Vaikhanasa Matrimonials</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .text-maroon-800 {
+            color: #5a1a01;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-tr from-amber-100 via-white to-orange-50 font-sans overflow-y-auto">
+
+    <div class="w-full px-6 py-10 max-w-6xl mx-auto">
+
+        <!-- 🧭 Page Title -->
+        <h2 class="text-4xl font-extrabold text-maroon-800 text-center mb-10">
+            Public Profiles
+        </h2>
+
+        <!-- 👥 Gallery Grid -->
+        {% if users %}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for user in users %}
+                    <div class="bg-white/80 p-6 rounded-xl text-center shadow">
+                        <img src="/static/uploads/{{ user.photo if user.photo else 'default.jpg' }}"
+                             alt="{{ user.name }}'s Photo"
+                             class="w-24 h-24 mx-auto mb-4 rounded-full border-2 border-yellow-400 object-cover">
+
+                        <h3 class="text-xl font-semibold text-gray-800">{{ user.name }}</h3>
+                        <p class="text-sm text-gray-600">{{ user.gender }}, {{ user.age }}</p>
+                        <p class="text-sm text-gray-600">{{ user.city }}, {{ user.country }}</p>
+
+                        <a href="/user/{{ user.id }}"
+                           class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition text-sm">
+                            View Profile
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center text-gray-600 mt-12">No approved profiles available at this time.</p>
+        {% endif %}
+
+        <!-- 📄 Pagination -->
+        {% if total_pages is defined and total_pages > 1 %}
+            <div class="mt-10 flex justify-center gap-2">
+                {% for page_num in range(1, total_pages + 1) %}
+                    <a href="/gallery?page={{ page_num }}"
+                       class="px-4 py-2 rounded-md text-sm {{ 'bg-yellow-600 text-white' if page_num == current_page else 'bg-white text-gray-700 border border-gray-300 hover:bg-yellow-100' }}">
+                        {{ page_num }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- 🔙 Back Link -->
+        <div class="text-center mt-10">
+            <a href="/profile"
+               class="text-yellow-800 text-sm underline hover:text-yellow-900">
+               ← Back to Profile
+            </a>
+        </div>
+    </div>
+</body>
+</html>

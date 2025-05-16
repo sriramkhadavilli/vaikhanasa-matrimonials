@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | Vaikhanasa Matrimonials</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-tr from-amber-100 via-white to-yellow-50 p-8 font-sans">
+
+    <div class="max-w-6xl mx-auto bg-white/80 shadow-xl rounded-xl p-8">
+        <h1 class="text-3xl font-bold text-yellow-900 mb-6 text-center">Admin Dashboard</h1>
+
+        <table class="w-full table-auto border-collapse shadow text-sm">
+            <thead>
+                <tr class="bg-yellow-200 text-yellow-900">
+                    <th class="p-3 border">ID</th>
+                    <th class="p-3 border">Name</th>
+                    <th class="p-3 border">Email</th>
+                    <th class="p-3 border">Approved</th>
+                    <th class="p-3 border">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr class="text-gray-700 bg-white hover:bg-yellow-50 transition">
+                        <td class="p-3 border text-center">{{ user.id }}</td>
+                        <td class="p-3 border">{{ user.name }}</td>
+                        <td class="p-3 border">{{ user.email }}</td>
+                        <td class="p-3 border text-center">
+                            {% if user.is_approved %}
+                                ✅
+                            {% else %}
+                                ❌
+                            {% endif %}
+                        </td>
+                        <td class="p-3 border text-center">
+                            {% if not user.is_approved %}
+                                <a href="/approve/{{ user.id }}"
+                                   class="bg-green-600 text-white px-3 py-1 rounded-md hover:bg-green-700 transition text-sm">
+                                   Approve
+                                </a>
+                            {% else %}
+                                <span class="text-gray-400 text-xs">-</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="mt-8 text-center">
+            <a href="/logout" class="text-blue-600 underline hover:text-blue-800 text-sm">Logout</a>
+        </div>
+    </div>
+</body>
+</html>

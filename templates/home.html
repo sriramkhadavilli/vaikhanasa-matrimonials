@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vaikhanasa Matrimonials</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .text-maroon-800 {
+            color: #5a1a01;
+        }
+        .bg-maroon-700 {
+            background-color: #7a1d02;
+        }
+        .hover\:bg-maroon-800:hover {
+            background-color: #631800;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-tr from-amber-100 via-white to-orange-50 flex items-center justify-center font-sans">
+
+    <!-- 🪔 Fullscreen Container -->
+    <div class="w-full h-screen flex items-center justify-center px-6">
+
+        <!-- 🔱 Centered Hero Card -->
+        <div class="bg-white/95 border-[3px] border-yellow-400 shadow-2xl rounded-3xl px-10 py-12 md:px-16 text-center max-w-2xl w-full">
+
+            <!-- 🔰 Logo -->
+            <img src="/static/logo.png" alt="Vaikhanasa Logo"
+                 class="w-24 h-24 mx-auto mb-6 rounded-full border-4 border-yellow-500 shadow-md bg-white">
+
+            <!-- 🕉️ Title -->
+            <h1 class="text-4xl font-extrabold text-maroon-800 tracking-tight mb-3 leading-snug">
+                Vaikhanasa Matrimonials
+            </h1>
+
+            <!-- ✨ Updated Tagline -->
+            <p class="text-base md:text-lg text-gray-700 mb-6 leading-relaxed">
+                A trusted space for Vaikhanasa families to connect.
+            </p>
+
+            {% if user %}
+                <!-- 👤 Logged-in Message -->
+                <p class="text-gray-800 text-lg font-medium mb-4">Welcome back, {{ user.name }}!</p>
+                <a href="/profile"
+                   class="inline-block bg-yellow-600 text-white px-6 py-3 rounded-full hover:bg-yellow-700 transition shadow">
+                   Go to Profile
+                </a>
+                <br>
+                <a href="/logout" class="text-sm text-red-600 underline mt-4 inline-block">Logout</a>
+            {% else %}
+                <!-- 📍 Call-to-Action Buttons -->
+                <div class="flex flex-col sm:flex-row justify-center gap-4 mt-2">
+                    <a href="/register"
+                       class="w-full sm:w-auto bg-yellow-700 text-white px-6 py-3 rounded-full font-medium shadow hover:bg-yellow-800 transition">
+                       Register
+                    </a>
+                    <a href="/login"
+                       class="w-full sm:w-auto bg-maroon-700 text-white px-6 py-3 rounded-full font-medium shadow hover:bg-maroon-800 transition">
+                       Login
+                    </a>
+                </div>
+
+                <!-- 🔍 Gallery Link -->
+                <a href="/gallery"
+                   class="mt-6 inline-block text-yellow-900 text-sm hover:text-yellow-700 underline">
+                   Browse Public Gallery
+                </a>
+            {% endif %}
+
+        </div>
+    </div>
+</body>
+</html>

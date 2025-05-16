@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matches | Vaikhanasa Matrimonials</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .text-maroon-800 {
+            color: #5a1a01;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-tr from-amber-100 via-white to-orange-50 font-sans overflow-y-auto">
+
+    <!-- 📍 Page Container -->
+    <div class="w-full px-6 py-10 max-w-6xl mx-auto">
+
+        <!-- 🧭 Page Title -->
+        <h2 class="text-4xl font-extrabold text-maroon-800 mb-6 text-center">
+            Match Suggestions for {{ user.name }}
+        </h2>
+
+        <!-- 🔍 Filter Form -->
+        <form method="get" action="/matches"
+              class="bg-white/80 p-4 rounded-xl shadow mb-8 flex flex-wrap items-end gap-4 justify-center">
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Gender</label>
+                <select name="gender" class="px-3 py-2 border border-gray-300 rounded-md">
+                    <option value="">Any</option>
+                    <option value="Male" {% if request.query_params.get('gender') == 'Male' %}selected{% endif %}>Male</option>
+                    <option value="Female" {% if request.query_params.get('gender') == 'Female' %}selected{% endif %}>Female</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Gotra</label>
+                <input type="text" name="gotra" value="{{ request.query_params.get('gotra', '') }}"
+                       class="px-3 py-2 border border-gray-300 rounded-md">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Nakshatra</label>
+                <input type="text" name="nakshatra" value="{{ request.query_params.get('nakshatra', '') }}"
+                       class="px-3 py-2 border border-gray-300 rounded-md">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Age</label>
+                <div class="flex gap-2">
+                    <input type="number" name="min_age" placeholder="Min" style="width:70px;"
+                           value="{{ request.query_params.get('min_age', '') }}"
+                           class="px-2 py-2 border border-gray-300 rounded-md">
+                    <input type="number" name="max_age" placeholder="Max" style="width:70px;"
+                           value="{{ request.query_params.get('max_age', '') }}"
+                           class="px-2 py-2 border border-gray-300 rounded-md">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Country</label>
+                <input type="text" name="country" value="{{ request.query_params.get('country', '') }}"
+                       class="px-3 py-2 border border-gray-300 rounded-md">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">City</label>
+                <input type="text" name="city" value="{{ request.query_params.get('city', '') }}"
+                       class="px-3 py-2 border border-gray-300 rounded-md">
+            </div>
+
+            <button type="submit"
+                    class="bg-yellow-600 text-white px-6 py-2 rounded-md font-medium hover:bg-yellow-700 transition">
+                Apply Filters
+            </button>
+        </form>
+
+        <!-- 🧑‍🤝‍🧑 Match List -->
+        {% if matches %}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for match in matches %}
+                    <div class="bg-white/80 p-5 rounded-xl shadow text-center">
+                        <img src="/static/uploads/{{ match.photo if match.photo else 'default.jpg' }}"
+                             alt="Match Photo"
+                             class="w-24 h-24 mx-auto mb-3 rounded-full object-cover border-2 border-yellow-400">
+
+                        <h3 class="text-xl font-bold text-gray-800">{{ match.name }}</h3>
+                        <p class="text-sm text-gray-600">{{ match.gender }}, {{ match.age }}</p>
+                        <p class="text-sm text-gray-600">{{ match.city }}, {{ match.country }}</p>
+
+                        <div class="mt-2 flex flex-wrap justify-center gap-2 text-xs text-gray-700">
+                            <span class="px-2 py-1 bg-yellow-100 rounded-full border border-yellow-300">
+                                Gotra: {{ match.gotra }}
+                            </span>
+                            <span class="px-2 py-1 bg-orange-100 rounded-full border border-orange-300">
+                                Nakshatra: {{ match.nakshatra }}
+                            </span>
+                        </div>
+
+                        <a href="/user/{{ match.id }}"
+                           class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition text-sm">
+                            View Profile
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center text-gray-600 text-lg mt-12">No matches found with selected filters.</p>
+        {% endif %}
+
+        <div class="text-center mt-10">
+            <a href="/profile" class="text-yellow-800 text-sm underline hover:text-yellow-900">← Back to Profile</a>
+        </div>
+    </div>
+</body>
+</html>
