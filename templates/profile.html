@@ -31,14 +31,25 @@
             {{ user.email }} &bull; {{ user.phone }}
         </p>
 
-        <!-- 🧾 Profile Info -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto text-left text-gray-800 text-base mb-10">
+        <!-- 🧾 Full Profile Info -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto text-left text-gray-800 text-base mb-10">
             <p><strong>Gender:</strong> {{ user.gender }}</p>
             <p><strong>Age:</strong> {{ user.age }}</p>
+            <p><strong>DOB:</strong> {{ user.dob }}</p>
+            <p><strong>Place of Birth:</strong> {{ user.pob }}</p>
             <p><strong>Country:</strong> {{ user.country }}</p>
             <p><strong>City:</strong> {{ user.city }}</p>
             <p><strong>Gotra:</strong> {{ user.gotra }}</p>
             <p><strong>Nakshatra:</strong> {{ user.nakshatra }}</p>
+            <p><strong>Raasi:</strong> {{ user.raasi }}</p>
+            <p><strong>Sub-Sakha:</strong> {{ user.sub_sakha }}</p>
+            <p><strong>Education:</strong> {{ user.education }}</p>
+            <p><strong>Profession:</strong> {{ user.profession }}</p>
+            <p><strong>Organization:</strong> {{ user.organization }}</p>
+            <p><strong>Work Location:</strong> {{ user.work_location }}</p>
+            <p><strong>Height:</strong> {{ user.height }}</p>
+            <p><strong>Complexion:</strong> {{ user.complexion }}</p>
+            <p><strong>Salary:</strong> {{ user.salary }}</p>
         </div>
 
         <!-- 🔗 Actions -->
